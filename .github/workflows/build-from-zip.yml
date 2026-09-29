@@ -18,36 +18,34 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Find and extract Android project ZIP
-        shell: bash
         run: |
-          set -e
+          ZIP_FILE="SiddiqClinic_Android_v74_1_ChiefComplaintHandwriting.zip"
 
-          ZIP_FILE="./SiddiqClinic_Android_v74_1_ChiefComplaintHandwriting.zip"
+          echo "Using ZIP: $ZIP_FILE"
 
-          if [ -z "$ZIP_FILE" ]; then
-            echo "ERROR: Android project ZIP not found"
-            exit 1
-          fi
-
-          echo "Found ZIP: $ZIP_FILE"
-
+          rm -rf extracted
           mkdir -p extracted
+
           unzip -q "$ZIP_FILE" -d extracted
 
-          PROJECT_DIR=$(find extracted -mindepth 1 -maxdepth 1 -type d | head -n 1)
+          echo "Extracted files:"
+          find extracted -maxdepth 4 -type f | head -100
 
-          if [ -z "$PROJECT_DIR" ]; then
-            echo "ERROR: Android project directory not found"
+          PROJECT_DIR=$(find extracted -type f -path "*/app/build.gradle" -print -quit | xargs -r dirname | xargs -r dirname)
+
+          if [ -z "$PROJECT_DIR" ] || [ ! -f "$PROJECT_DIR/app/build.gradle" ]; then
+            echo "ERROR: Could not find Android project containing app/build.gradle"
             exit 1
           fi
 
-          echo "Project directory: $PROJECT_DIR"
+          echo "Android project found at: $PROJECT_DIR"
 
           cp -R "$PROJECT_DIR"/. .
 
-          echo "Android project structure:"
-          find . -maxdepth 3 -type f | sort | head -100
-
+          echo "Project files at repository root:"
+          ls -la
+          ls -la app
+          
       - name: Fix root Gradle configuration
         run: |
           cat > build.gradle <<'EOF'
