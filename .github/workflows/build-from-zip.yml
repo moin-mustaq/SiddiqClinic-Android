@@ -22,7 +22,7 @@ jobs:
         run: |
           set -e
 
-          ZIP_FILE=$(find . -maxdepth 1 -type f -name "*.zip" | head -n 1)
+          ZIP_FILE="./SiddiqClinic_Android_v71_Buildable_Fixed.zip"
 
           if [ -z "$ZIP_FILE" ]; then
             echo "ERROR: Android project ZIP not found"
