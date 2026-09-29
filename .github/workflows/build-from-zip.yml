@@ -22,7 +22,7 @@ jobs:
         run: |
           set -e
 
-          ZIP_FILE="./SiddiqClinic_Android_v71_Buildable_Fixed.zip"
+          ZIP_FILE="./SiddiqClinic_Android_v74_1_ChiefComplaintHandwriting.zip"
 
           if [ -z "$ZIP_FILE" ]; then
             echo "ERROR: Android project ZIP not found"
