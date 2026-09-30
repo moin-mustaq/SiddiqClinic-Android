@@ -19,7 +19,7 @@ jobs:
 
       - name: Find and extract Android project ZIP
         run: |
-          ZIP_FILE="SiddiqClinic_Android_v82_ConfigurableBillTemplates.zip"
+          ZIP_FILE="SiddiqClinic_Android_v82_1_BuildFix.zip"
 
           echo "Using ZIP: $ZIP_FILE"
 
