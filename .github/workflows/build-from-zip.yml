@@ -19,7 +19,7 @@ jobs:
 
       - name: Find and extract Android project ZIP
         run: |
-          ZIP_FILE="SiddiqClinic_Android_v137_BillTemplate_GoogleAuth_Fix2.zip"
+          ZIP_FILE="SiddiqClinic_Android_v138_PrescriptionPreviewScrollAlignment.zip"
 
           echo "Using ZIP: $ZIP_FILE"
 
